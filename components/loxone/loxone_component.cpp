@@ -39,7 +39,7 @@ namespace esphome {
       tcp_server_ = new AsyncServer(listen_port_);
       tcp_server_->onClient([this](void* arg, AsyncClient *client) {
         ESP_LOGD(TAG, "new client has been connected to server, ip: %s",
-                 client->remoteIP().toString().c_str());
+                 client->getRemoteAddress().toString().c_str());
         client->onData([this](void* arg, AsyncClient *client, void *data, size_t len) {
           ESP_LOGD(TAG, "receive data, length=%d, data=%s", len, data);
           receive_string_buffer_.append((char*)data, len);
